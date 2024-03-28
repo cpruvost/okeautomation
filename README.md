@@ -13,5 +13,6 @@ Rename env-vars-template.ps1 to env-vars.ps1 and update all the parameters with 
 ## Run the terraform stack
 
 Initialize env variables running env-vars-template.ps1 or env-vars-template.sh
-Do a test awith a terraform plan
+Do a test with a terraform plan
 Create the VCN and OKE with terraform apply.
+After that you can destroy all the resources with a terraform destroy.
