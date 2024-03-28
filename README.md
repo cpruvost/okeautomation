@@ -9,10 +9,9 @@ Reading the network files you can understand the requisites for the network part
 You must know terraform a little
 Clone the github repo...
 Rename env-vars-template.ps1 to env-vars.ps1 and update all the parameters with your values (or sh if linux)
-Now you are ready.   
 
 ## Run the terraform stack
 
 Initialize env variables running env-vars-template.ps1 or env-vars-template.sh
-Do a test awith a terrafor plan
-Create teh VCN and OKE with terraform apply.
+Do a test awith a terraform plan
+Create the VCN and OKE with terraform apply.
