@@ -1,4 +1,4 @@
-# Terraform Automation on Oracle Cloud with OCI Stack Resource Managar: Create an OKE with Managed nodes in a VCN where you can choose IP cidr Blocks
+# Terraform Automation on Oracle Cloud with OCI Stack Resource Manager: Create an OKE with Managed nodes in a VCN where you can choose IP cidr Blocks
 
 This project has been designed to run with OCI Stack Resource Manager.
 
