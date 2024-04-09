@@ -1,18 +1,20 @@
 ### VCN variables
-variable "tenancy_ocid" {
-    description = "The OCI Tenancy ocid"
-    type        = string
-}
+# Not usefull in theory but keep it to remind
+# variable "tenancy_ocid" {
+#     description = "The OCI Tenancy ocid"
+#     type        = string
+# }
 
 variable "compartment_ocid" {
     description = "The OCI Compartment ocid"
     type        = string
 }
 
-data "oci_identity_availability_domain" "ad" {
-  compartment_id = var.tenancy_ocid
-  ad_number      = 1
-}
+# Not usefull in theory but keep it to remind
+# data "oci_identity_availability_domain" "ad" {
+#   compartment_id = var.tenancy_ocid
+#   ad_number      = 1
+# }
 
 data "oci_core_services" "test_services" {
 }

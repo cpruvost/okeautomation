@@ -7,16 +7,17 @@ terraform {
 
   #OCI Terraform Stack does not support last version
   #for outside OCI Terraform Stack
-  required_version = "~> 1.7.3"
+  #required_version = "~> 1.7.3"
   #for OCI Terraform Stack
-  #required_version = "~> 1.2.9"
+  required_version = "~> 1.2.9"
 }
 
 module "network" {
   source  = "./modules/network"
 
   compartment_ocid  = var.compartment_ocid
-  tenancy_ocid = var.tenancy_ocid
+  # Not usefull in theory but keep it to remind
+  #tenancy_ocid = var.tenancy_ocid
 }
 
 module "oke" {
