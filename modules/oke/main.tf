@@ -66,7 +66,7 @@ variable "ssh_public_key" {
     type        = string
 }
 
-data "oci_identity_availability_domains" "test_availability_domains" {
+data "oci_identity_availability_domains" "ads" {
     #Required
     compartment_id = var.compartment_ocid
 }	
@@ -128,7 +128,7 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
 		placement_configs {
 			//availability_domain = "Vihs:EU-PARIS-1-AD-1"
 			//Get First Avaibility Domain
-			availability_domain = "${lookup(data.oci_identity_availability_domains.ad.availability_domains[0], "name")}"
+			availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[0], "name")}"
 			subnet_id = var.node_subnet_id
 		}
 		size = "3"
