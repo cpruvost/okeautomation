@@ -66,6 +66,11 @@ variable "ssh_public_key" {
     type        = string
 }
 
+data "oci_identity_availability_domains" "test_availability_domains" {
+    #Required
+    compartment_id = var.compartment_ocid
+}	
+
 resource "oci_containerengine_cluster" "oke_oci_containerengine_cluster" {
 	cluster_pod_network_options {
 		cni_type = "OCI_VCN_IP_NATIVE"
@@ -121,7 +126,9 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
             pod_subnet_ids = [var.node_subnet_id]
 		}
 		placement_configs {
-			availability_domain = "Vihs:EU-PARIS-1-AD-1"
+			//availability_domain = "Vihs:EU-PARIS-1-AD-1"
+			//Get First Avaibility Domain
+			availability_domain = test_availability_domains[0]
 			subnet_id = var.node_subnet_id
 		}
 		size = "3"
