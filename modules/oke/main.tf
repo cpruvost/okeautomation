@@ -128,7 +128,7 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
 		placement_configs {
 			//availability_domain = "Vihs:EU-PARIS-1-AD-1"
 			//Get First Avaibility Domain
-			availability_domain = data.oci_identity_availability_domains.test_availability_domains[0]
+			availability_domain = "${lookup(data.oci_identity_availability_domains.ad.availability_domains[0], "name")}"
 			subnet_id = var.node_subnet_id
 		}
 		size = "3"
