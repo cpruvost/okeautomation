@@ -103,7 +103,7 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
 	}
 	initial_node_labels {
 		key = "name"
-		value = "MyOkeDemoCluster"
+		value = "pool1"
 	}
 	kubernetes_version = var.kube_version
 	name = "pool1"
@@ -126,7 +126,7 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
 	}
 	node_shape = "VM.Standard.E4.Flex"
 	node_shape_config {
-		memory_in_gbs = "32"
+		memory_in_gbs = "16"
 		ocpus = "2"
 	}
 	node_source_details {
@@ -135,4 +135,5 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
 		source_type = "IMAGE"
 	}
 	ssh_public_key = var.ssh_public_key
+	quantity_per_subnet = 1
 }
