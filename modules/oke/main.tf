@@ -131,7 +131,7 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
 			availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[0], "name")}"
 			subnet_id = var.node_subnet_id
 		}
-		size = "3"
+		size = var.worker_node_number
 	}
 	node_eviction_node_pool_settings {
 		eviction_grace_duration = "PT60M"
