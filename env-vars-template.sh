@@ -14,4 +14,5 @@ export TF_VAR_compartment_ocid="ocid1.compartment.oc1..xxxxxxxxxxxxxxxxxxxx"
 ### Region
 export TF_VAR_region="eu-paris-1"
 
-
+### Number of worker nodes
+$env:TF_VAR_worker_node_number="3"

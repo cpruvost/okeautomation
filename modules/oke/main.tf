@@ -41,6 +41,11 @@ variable "region" {
     type        = string
 }
 
+variable "worker_node_number" {
+    description = "The number of worker node"
+    type        = number
+}
+
 variable "InstanceImageOCID" {
   type = map(string)
 
@@ -135,5 +140,4 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
 		source_type = "IMAGE"
 	}
 	ssh_public_key = var.ssh_public_key
-	quantity_per_subnet = 1
 }

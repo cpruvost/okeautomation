@@ -32,5 +32,6 @@ module "oke" {
   api_subnet_id = module.network.public_api_subnet_id
 
   ssh_public_key = var.ssh_public_key
+  worker_node_number = var.worker_node_number
 }
 

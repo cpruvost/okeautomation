@@ -35,3 +35,8 @@ variable "compartment_ocid" {
     description = "The OCI Compartment ocid"
     type        = string
 }
+
+variable "worker_node_number" {
+    description = "The number of worker node"
+    type        = number
+}
