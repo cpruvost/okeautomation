@@ -33,5 +33,6 @@ module "oke" {
 
   ssh_public_key = var.ssh_public_key
   worker_node_number = var.worker_node_number
+  node_shape = var.node_shape
 }
 

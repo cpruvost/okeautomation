@@ -40,3 +40,8 @@ variable "worker_node_number" {
     description = "The number of worker node"
     type        = number
 }
+
+variable "node_shape" {
+    description = "The OCI Node Shape"
+    type        = string
+}

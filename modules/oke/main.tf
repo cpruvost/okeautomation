@@ -66,6 +66,11 @@ variable "ssh_public_key" {
     type        = string
 }
 
+variable "node_shape" {
+    description = "The OCI Node Shape"
+    type        = string
+}
+
 data "oci_identity_availability_domains" "ads" {
     #Required
     compartment_id = var.compartment_ocid
@@ -136,7 +141,8 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
 	node_eviction_node_pool_settings {
 		eviction_grace_duration = "PT60M"
 	}
-	node_shape = "VM.Standard.E4.Flex"
+	//node_shape = "VM.Standard.E4.Flex"
+	node_shape = var.node_shape
 	node_shape_config {
 		memory_in_gbs = "16"
 		ocpus = "2"

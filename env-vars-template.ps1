@@ -17,4 +17,7 @@ $env:TF_VAR_region="eu-paris-1"
 ### Number of worker nodes
 $env:TF_VAR_worker_node_number="3"
 
+### Node Shape
+$env:TF_VAR_node_shape="VM.Standard.E4.Flex"
+
 
