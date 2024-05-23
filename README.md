@@ -28,7 +28,19 @@ You will use your github repo in this stack so.
 
 [You can have a list of the OCI regions on this link](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)
 
-![Stack Screen1](./documentation/stack2.png "Stack Screen2").
+Do not forget to set all the input variables :
+- compartment_ocid
+- region
+- node_shape
+- ssh_public_key
+- worker_node_number
+- type_shape
+  
+ Note only 2 options were tested in Paris Region :
+ - option 1 : node_shape = "VM.Standard.Ampere.Generic" + type_shape = "arm"
+ - option 2 : node_shape = "VM.Standard.E4.Flex" + type_shape = "amd"
+
+If you want to test more options you need to update the map InstanceImageOCID knowing that you must search for the good OKE image ocid. You can list the OKE image ocid using oci cli. Ex oci ce node-pool-options --profile EMEAPARIS get --node-pool-option-id all --> You will get all OKE image ocid from Paris Region. 
 
 ## Step 4 : Do a plan / apply / destroy on the stack as you want.
 
