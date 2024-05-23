@@ -59,7 +59,7 @@ variable "InstanceImageOCID" {
     // Oracle Image Linux 8 for Paris
     eu-paris-1-amd     = "ocid1.image.oc1.eu-paris-1.aaaaaaaaxecxqqa26qzs5vqhlf4wt5vcqboqtzdcbrgx3fm3f67wv4odsyla"
 	// Oracle-Linux-Cloud-Developer-8.9-aarch64-2024.02.29-0
-	eu-paris-1-arm = "ocid1.image.oc1.eu-paris-1.aaaaaaaao54uqbutziotnfvw4fxxxp6kzcudeqbgkcwyvkdpuvinpg7ya5ia"
+	eu-paris-1-arm = "ocid1.image.oc1.eu-paris-1.aaaaaaaaktow2mh2jaotmpfl7okouncbx7px3o6mlemrtiuv422upneskgwa"
   }
 }
 
