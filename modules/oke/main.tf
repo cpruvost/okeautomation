@@ -52,12 +52,14 @@ variable "InstanceImageOCID" {
   default = {
     // See https://docs.us-phoenix-1.oraclecloud.com/images/
     // Oracle-provided image "Oracle-Linux-7.5-2018.10.16-0"
-    us-phoenix-1   = "ocid1.image.oc1.phx.aaaaaaaadjnj3da72bztpxinmqpih62c2woscbp6l3wjn36by2cvmdhjub6a"
-    us-ashburn-1   = "ocid1.image.oc1.iad.aaaaaaaawufnve5jxze4xf7orejupw5iq3pms6cuadzjc7klojix6vmk42va"
-    eu-frankfurt-1 = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaagbrvhganmn7awcr7plaaf5vhabmzhx763z5afiitswjwmzh7upna"
-    uk-london-1    = "ocid1.image.oc1.uk-london-1.aaaaaaaajwtut4l7fo3cvyraate6erdkyf2wdk5vpk6fp6ycng3dv2y3ymvq"
+    us-phoenix-1-amd   = "ocid1.image.oc1.phx.aaaaaaaadjnj3da72bztpxinmqpih62c2woscbp6l3wjn36by2cvmdhjub6a"
+    us-ashburn-1-amd   = "ocid1.image.oc1.iad.aaaaaaaawufnve5jxze4xf7orejupw5iq3pms6cuadzjc7klojix6vmk42va"
+    eu-frankfurt-1-amd = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaagbrvhganmn7awcr7plaaf5vhabmzhx763z5afiitswjwmzh7upna"
+    uk-london-1-amd    = "ocid1.image.oc1.uk-london-1.aaaaaaaajwtut4l7fo3cvyraate6erdkyf2wdk5vpk6fp6ycng3dv2y3ymvq"
     // Oracle Image Linux 8 for Paris
-    eu-paris-1     = "ocid1.image.oc1.eu-paris-1.aaaaaaaaxecxqqa26qzs5vqhlf4wt5vcqboqtzdcbrgx3fm3f67wv4odsyla"
+    eu-paris-1-amd     = "ocid1.image.oc1.eu-paris-1.aaaaaaaaxecxqqa26qzs5vqhlf4wt5vcqboqtzdcbrgx3fm3f67wv4odsyla"
+	// Oracle-Linux-Cloud-Developer-8.9-aarch64-2024.02.29-0
+	eu-paris-1-arm = "ocid1.image.oc1.eu-paris-1.aaaaaaaao54uqbutziotnfvw4fxxxp6kzcudeqbgkcwyvkdpuvinpg7ya5ia"
   }
 }
 
@@ -68,6 +70,11 @@ variable "ssh_public_key" {
 
 variable "node_shape" {
     description = "The OCI Node Shape"
+    type        = string
+}
+
+variable "type_shape" {
+    description = "The OCI Type Shape (amd or intel)"
     type        = string
 }
 
@@ -149,7 +156,7 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
 	}
 	node_source_details {
 		//image_id = "ocid1.image.oc1.eu-paris-1.aaaaaaaaxecxqqa26qzs5vqhlf4wt5vcqboqtzdcbrgx3fm3f67wv4odsyla"
-        image_id = var.InstanceImageOCID[var.region]
+        image_id = var.InstanceImageOCID["${var.region}-${var.type_shape}"]
 		source_type = "IMAGE"
 	}
 	ssh_public_key = var.ssh_public_key

@@ -19,3 +19,6 @@ $env:TF_VAR_worker_node_number="3"
 
 ### Node Shape
 $env:TF_VAR_node_shape="VM.Standard.E4.Flex"
+
+### Type Shape
+$env:TF_VAR_node_shape="arm"

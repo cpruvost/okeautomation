@@ -45,3 +45,8 @@ variable "node_shape" {
     description = "The OCI Node Shape"
     type        = string
 }
+
+variable "type_shape" {
+    description = "The OCI Type Shape (amd or intel)"
+    type        = string
+}
