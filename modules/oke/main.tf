@@ -31,7 +31,7 @@ variable "kube_version" {
 }
 
 variable "kube_type" {
-    description = "the Kube Type basic or Enhanced"
+    description = "the Kube Type basic or Enhanced (ENHANCED_CLUSTER or BASIC_CLUSTER)"
     type        = string
     default     = "BASIC_CLUSTER"
 }
@@ -59,7 +59,8 @@ variable "InstanceImageOCID" {
     // Oracle Image Linux 8 for Paris
     eu-paris-1-amd     = "ocid1.image.oc1.eu-paris-1.aaaaaaaaxecxqqa26qzs5vqhlf4wt5vcqboqtzdcbrgx3fm3f67wv4odsyla"
 	// Oracle-Linux-Cloud-Developer-8.9-aarch64-2024.02.29-0
-	eu-paris-1-arm = "ocid1.image.oc1.eu-paris-1.aaaaaaaaktow2mh2jaotmpfl7okouncbx7px3o6mlemrtiuv422upneskgwa"
+	eu-paris-1-arm     = "ocid1.image.oc1.eu-paris-1.aaaaaaaaktow2mh2jaotmpfl7okouncbx7px3o6mlemrtiuv422upneskgwa"
+	uk-london-1-arm    = "ocid1.image.oc1.uk-london-1.aaaaaaaari3q3id5tq6paswaw74qkujnaaxlydfltqeexv7qeckht4hxogfa"
   }
 }
 
@@ -137,12 +138,29 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
 			cni_type = "OCI_VCN_IP_NATIVE"
             pod_subnet_ids = [var.node_subnet_id]
 		}
+		
+		//Region with 1 AD or use only the first AD
 		placement_configs {
 			//availability_domain = "Vihs:EU-PARIS-1-AD-1"
 			//Get First Avaibility Domain
 			availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[0], "name")}"
 			subnet_id = var.node_subnet_id
 		}
+
+		//Region with 3 AD (not checked for the moment)
+		/* placement_configs {
+			availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[0], "name")}"
+			subnet_id = "${oci_core_subnet.node_subnet.id}"
+		}
+		placement_configs {
+			availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[1], "name")}"
+			subnet_id = "${oci_core_subnet.node_subnet.id}"
+		}
+		placement_configs {
+			availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[2], "name")}"
+			subnet_id = "${oci_core_subnet.node_subnet.id}"
+		} */
+
 		size = var.worker_node_number
 	}
 	node_eviction_node_pool_settings {
@@ -155,6 +173,8 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
 		ocpus = "2"
 	}
 	node_source_details {
+		//Increase size of boot volume if needed.
+		//boot_volume_size_in_gbs = "100"
 		//image_id = "ocid1.image.oc1.eu-paris-1.aaaaaaaaxecxqqa26qzs5vqhlf4wt5vcqboqtzdcbrgx3fm3f67wv4odsyla"
         image_id = var.InstanceImageOCID["${var.region}-${var.type_shape}"]
 		source_type = "IMAGE"
