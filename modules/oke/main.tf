@@ -153,11 +153,11 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
 			subnet_id = var.node_subnet_id
 		}
 		placement_configs {
-			availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[length(data.oci_identity_availability_domains.ads) > 1 ? 1 : 0], "name")}"
+			availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[length(data.oci_identity_availability_domains.ads) == 3 ? 1 : 0], "name")}"
 			subnet_id = var.node_subnet_id
 		}
 		placement_configs {
-			availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[length(data.oci_identity_availability_domains.ads) > 1 ? 2 : 0], "name")}"
+			availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[length(data.oci_identity_availability_domains.ads) == 3 ? 2 : 0], "name")}"
 			subnet_id = var.node_subnet_id
 		} 
 
