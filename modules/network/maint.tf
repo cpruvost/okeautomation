@@ -220,6 +220,9 @@ resource "oci_core_security_list" "node_sec_list" {
 		source = "0.0.0.0/0"
 		stateless = "false"
 	}
+
+
+	
 	vcn_id = "${oci_core_vcn.oke_oci_core_vcn.id}"
 }
 
