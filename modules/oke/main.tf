@@ -136,7 +136,7 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
 		}
 		node_pool_pod_network_option_details {
 			cni_type = "OCI_VCN_IP_NATIVE"
-            pod_subnet_ids = [var.node_subnet_id]
+            //pod_subnet_ids = [var.node_subnet_id]
 		}
 		
 		//Region with 1 AD or use only the first AD
