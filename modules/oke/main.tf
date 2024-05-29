@@ -164,7 +164,7 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
 		size = var.worker_node_number
 	}
 	node_eviction_node_pool_settings {
-		eviction_grace_duration = "PT60M"
+		eviction_grace_duration = "PT1H"
 	}
 	//node_shape = "VM.Standard.E4.Flex"
 	node_shape = var.node_shape
