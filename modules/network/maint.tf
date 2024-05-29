@@ -16,6 +16,15 @@ variable "compartment_ocid" {
 #   ad_number      = 1
 # }
 
+variable "RouteRuleDestination" {
+  type = map(string)
+
+  default = {
+    eu-paris-1    = "all-cdg-services-in-oracle-services-network"
+	uk-london-1   = "all-lhr-services-in-oracle-services-network"
+  }
+}
+
 data "oci_core_services" "test_services" {
 }
 
@@ -59,7 +68,8 @@ resource "oci_core_route_table" "oke_oci_core_route_table" {
 	}
 	route_rules {
 		description = "traffic to OCI services"
-		destination = "all-cdg-services-in-oracle-services-network"
+		//destination = "all-cdg-services-in-oracle-services-network"
+		destination = var.RouteRuleDestination[${var.region}]
 		destination_type = "SERVICE_CIDR_BLOCK"
 		network_entity_id = oci_core_service_gateway.oke_oci_core_service_gateway.id
 	}
@@ -153,7 +163,9 @@ resource "oci_core_security_list" "node_sec_list" {
 	}
 	egress_security_rules {
 		description = "Allow nodes to communicate with OKE to ensure correct start-up and continued functioning"
-		destination = "all-cdg-services-in-oracle-services-network"
+		//For london --> all-lhr-services-in-oracle-services-network (oci network service list --region uk-london-1)
+		//destination = "all-cdg-services-in-oracle-services-network"
+		destination = var.RouteRuleDestination[${var.region}]
 		destination_type = "SERVICE_CIDR_BLOCK"
 		protocol = "6"
 		stateless = "false"
@@ -212,7 +224,8 @@ resource "oci_core_security_list" "kubernetes_api_endpoint_sec_list" {
 	display_name = "oke-k8sApiEndpoint"
 	egress_security_rules {
 		description = "Allow Kubernetes Control Plane to communicate with OKE"
-		destination = "all-cdg-services-in-oracle-services-network"
+		//destination = "all-cdg-services-in-oracle-services-network"
+		destination = var.RouteRuleDestination[${var.region}]
 		destination_type = "SERVICE_CIDR_BLOCK"
 		protocol = "6"
 		stateless = "false"

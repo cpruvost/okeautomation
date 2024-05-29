@@ -42,6 +42,16 @@ Do not forget to set all the input variables :
 
 If you want to test more options you need to update the map InstanceImageOCID knowing that you must search for the good OKE image ocid. You can list the OKE image ocid using oci cli. Ex oci ce node-pool-options --profile EMEAPARIS get --node-pool-option-id all --> You will get all OKE image ocid from Paris Region. 
 
+You can check too that the image ocid is compatible with a type shape : oci compute image-shape-compatibility-entry list --image-id ocid1.image.oc1.uk-london-1.aaaaaaaavojenya4gweaw7jqkvu2kesealf43wbwku3ux5grobk7ez75gmuq
+
 ## Step 4 : Do a plan / apply / destroy on the stack as you want.
 
 ![Use Stack](./documentation/runstack.png "Use Stack").
+
+## if using another region than Paris you must check too some info on the network because some resources are in relation with the region
+ex : egress_security_rules {
+		description = "Allow nodes to communicate with OKE to ensure correct start-up and continued functioning"
+		//For london --> all-lhr-services-in-oracle-services-network (oci network service list --region uk-london-1)
+		
+        //For Paris 
+        destination = "all-cdg-services-in-oracle-services-network"
