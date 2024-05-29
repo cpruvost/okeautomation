@@ -228,8 +228,8 @@ resource "oci_core_security_list" "node_sec_list" {
 		source_type = "CIDR_BLOCK"
 		stateless   = "false"
 		tcp_options {
-		max = "30000"
-		min = "32767"
+		max = "32767"
+		min = "30000"
 		}
 	}
 
