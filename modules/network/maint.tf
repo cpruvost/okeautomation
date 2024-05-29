@@ -15,6 +15,10 @@ variable "compartment_ocid" {
 #   compartment_id = var.tenancy_ocid
 #   ad_number      = 1
 # }
+variable "region" {
+    description = "The OCI region"
+    type        = string
+}
 
 variable "RouteRuleDestination" {
   type = map(string)

@@ -16,6 +16,7 @@ module "network" {
   source  = "./modules/network"
 
   compartment_ocid  = var.compartment_ocid
+  region = var.region
   # Not usefull in theory but keep it to remind
   #tenancy_ocid = var.tenancy_ocid
 }
