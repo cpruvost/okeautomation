@@ -55,8 +55,8 @@ variable "InstanceImageOCID" {
     us-phoenix-1-amd   = "ocid1.image.oc1.phx.aaaaaaaadjnj3da72bztpxinmqpih62c2woscbp6l3wjn36by2cvmdhjub6a"
     us-ashburn-1-amd   = "ocid1.image.oc1.iad.aaaaaaaawufnve5jxze4xf7orejupw5iq3pms6cuadzjc7klojix6vmk42va"
     eu-frankfurt-1-amd = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaagbrvhganmn7awcr7plaaf5vhabmzhx763z5afiitswjwmzh7upna"
-    uk-london-1-amd    = "ocid1.image.oc1.uk-london-1.aaaaaaaajwtut4l7fo3cvyraate6erdkyf2wdk5vpk6fp6ycng3dv2y3ymvq"
-    // Oracle Image Linux 8 for Paris
+    // Oracle Image Linux 8 for Paris/London
+	uk-london-1-amd    = "ocid1.image.oc1.uk-london-1.aaaaaaaa5rzn3mvwnhmhwgmbl4hjnecsljnsc2qflihavbhffksmre4ba4uq"
     eu-paris-1-amd     = "ocid1.image.oc1.eu-paris-1.aaaaaaaaxecxqqa26qzs5vqhlf4wt5vcqboqtzdcbrgx3fm3f67wv4odsyla"
 	// Oracle-Linux-Cloud-Developer-8.9-aarch64-2024.02.29-0
 	eu-paris-1-arm     = "ocid1.image.oc1.eu-paris-1.aaaaaaaaktow2mh2jaotmpfl7okouncbx7px3o6mlemrtiuv422upneskgwa"
@@ -140,15 +140,17 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
 		}
 		
 		//Region with 1 AD or use only the first AD
-		placement_configs {
+		/* placement_configs {
 			//availability_domain = "Vihs:EU-PARIS-1-AD-1"
 			//Get First Avaibility Domain
 			availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[0], "name")}"
 			subnet_id = var.node_subnet_id
-		}
+		} */
 
 		//Region with 3 AD (not checked for the moment)
-		/* placement_configs {
+		var numberOfAds = "${length(data.oci_identity_availability_domains.ads.availability_domains)}"
+		index1 = 
+		placement_configs {
 			availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[0], "name")}"
 			subnet_id = "${oci_core_subnet.node_subnet.id}"
 		}
@@ -159,7 +161,7 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
 		placement_configs {
 			availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[2], "name")}"
 			subnet_id = "${oci_core_subnet.node_subnet.id}"
-		} */
+		} 
 
 		size = var.worker_node_number
 	}
