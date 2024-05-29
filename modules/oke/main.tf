@@ -84,18 +84,6 @@ data "oci_identity_availability_domains" "ads" {
     compartment_id = var.compartment_ocid
 }	
 
-variable "index2" {
-    description = "The index2 AD"
-    type        = number
-	default     = length(data.oci_identity_availability_domains.ads) > 1 ? 1 : 0
-}
-
-variable "index3" {
-    description = "The index3 AD"
-    type        = number
-	default     = length(data.oci_identity_availability_domains.ads) > 1 ? 2 : 0
-}
-
 resource "oci_containerengine_cluster" "oke_oci_containerengine_cluster" {
 	cluster_pod_network_options {
 		cni_type = "OCI_VCN_IP_NATIVE"
@@ -165,11 +153,11 @@ resource "oci_containerengine_node_pool" "create_node_pool_1" {
 			subnet_id = var.node_subnet_id
 		}
 		placement_configs {
-			availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[var.index2], "name")}"
+			availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[length(data.oci_identity_availability_domains.ads) > 1 ? 1 : 0], "name")}"
 			subnet_id = var.node_subnet_id
 		}
 		placement_configs {
-			availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[var.index3], "name")}"
+			availability_domain = "${lookup(data.oci_identity_availability_domains.ads.availability_domains[length(data.oci_identity_availability_domains.ads) > 1 ? 2 : 0], "name")}"
 			subnet_id = var.node_subnet_id
 		} 
 
