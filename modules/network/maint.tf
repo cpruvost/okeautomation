@@ -221,8 +221,34 @@ resource "oci_core_security_list" "node_sec_list" {
 		stateless = "false"
 	}
 
+	ingress_security_rules {
+		description = "Load balancer to worker nodes node ports"
+		protocol    = "6"
+		source      = "10.0.20.24/0"
+		source_type = "CIDR_BLOCK"
+		stateless   = "false"
+		tcp_options {
+		max = "30000"
+		min = "32767"
+		}
+	}
 
-	
+	ingress_security_rules {
+		description = "Allow load balancer to communicate with kube-proxy on worker nodes"
+		protocol    = "6"
+		source      = "10.0.20.0/24"
+		source_type = "CIDR_BLOCK"
+		stateless   = "false"
+		tcp_options {
+		max = "10256"
+		min = "10256"
+		}
+	}
+
+
+
+
+
 	vcn_id = "${oci_core_vcn.oke_oci_core_vcn.id}"
 }
 
